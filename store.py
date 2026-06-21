@@ -24,7 +24,7 @@ class Store:
 		active_products = [product for product in self.products if product.is_active()]
 		return active_products
 
-	def order(self, shopping_list: list[products.Product]) -> float:
+	def order(self, shopping_list: list[tuple[products.Product, int]]) -> float:
 
 		total_price = 0
 		for product, quantity in shopping_list:
