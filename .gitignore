@@ -177,5 +177,5 @@ cython_debug/
 _static
 .settings
 .codio
-
+.guides/
 
