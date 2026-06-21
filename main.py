@@ -1,8 +1,36 @@
+"""
+Initiate the main user interface for the Best Buy store application.
+
+This function runs an interactive command-line interface, allowing users to
+browse products, check inventory, and place orders. It continually displays a
+menu with options to list products, view total inventory, place an order, or
+exit the application. Input validation is performed for menu choices and
+product selections during the ordering process.
+
+:param store_obj: The store object providing access to product data and
+    ordering functionality.
+:return: This function does not return any value; it runs indefinitely until
+    the user explicitly chooses to exit.
+"""
 import products
 import store
 
 
 def start(store_obj: store.Store) -> None:
+	"""
+	Initiate the main user interface for the Best Buy store application.
+
+	This function runs an interactive command-line interface, allowing users to
+	browse products, check inventory, and place orders. It continually displays a
+	menu with options to list products, view total inventory, place an order, or
+	exit the application. Input validation is performed for menu choices and
+	product selections during the ordering process.
+
+	:param store_obj: The store object providing access to product data and
+	    ordering functionality.
+	:return: This function does not return any value; it runs indefinitely until
+	    the user explicitly chooses to exit.
+	"""
 	while True:
 		print()
 		print(80 * "=")
@@ -83,6 +111,9 @@ def start(store_obj: store.Store) -> None:
 
 
 def main():
+	"""
+	Set up the application's initial state and start its main loop.
+	"""
 	product_list = [products.Product("MacBook Air M2", price=1450, quantity=100),
 	                products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
 	                products.Product("Google Pixel 7", price=500, quantity=250)
