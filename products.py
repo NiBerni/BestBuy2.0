@@ -195,6 +195,48 @@ class Product:
         )
 
 
+class NonStockedProduct(Product):
+    def __init__(self, name: str, price: float) -> None:
+
+        super().__init__(name, price, quantity=0)
+
+    def set_quantity(self, quantity: int) -> None:
+
+        self.quantity = 0
+
+    def buy(self, quantity: int) -> float:
+
+        if quantity <= 0:
+            raise ValueError(f"Not enough of {self.name} in stock")
+
+        return float(self.price * quantity)
+
+    def show(self) -> None:
+
+        print(f"{self.name}, Price: {self.price}")
+
+
+class LimitedProduct(Product):
+    def __init__(self, name: str, price: float, quantity: int, maximum: int) -> None:
+
+        super().__init__(name, price, quantity)
+        self.maximum = maximum
+
+    def buy(self, quantity: int) -> None:
+
+        if quantity > self.maximum:
+            raise ValueError(
+                f"Product {self.name} can only purchased up to {self.maximum} times per order"
+            )
+        return super().buy(quantity)
+
+    def show(self) -> None:
+
+        print(
+            f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Max. amount/order: {self.maximum}"
+        )
+
+
 def main():
     """
     Demonstrate the functionality of the `Product` class.
