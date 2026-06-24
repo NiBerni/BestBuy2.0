@@ -178,4 +178,5 @@ _static
 .settings
 .codio
 .guides/
+tests/
 
