@@ -156,26 +156,30 @@ class Product:
         """
         self.active = False
 
-    def show(
-        self,
-    ) -> None:  # only using show() and not __repr__() because it is asked for in the instructions
-        """
-        Display the item's name, price, and quantity.
-
-        This method prints a user-friendly string representation of the
-        `Item` object's current state to standard output, including its
-        name, price, and quantity. It is intended for quick inspection
-        or simple display purposes rather than a formal string
-        representation (`__repr__` or `__str__`).
-
-        :return: None, as the method's primary effect is a side effect
-            (printing to console) and it does not explicitly return a value.
-        :rtype: None
-        """
+    def __str__(self) -> str:
         promotion_info = f", Promotion: {self.promotion.name}" if self.promotion else ""
-        print(
-            f"{self.name}, Price: {self.price}, Quantity: {self.quantity}{promotion_info}"
-        )
+        return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}{promotion_info}"
+
+    # def show(
+    #     self,
+    # ) -> None:  # only using show() and not __repr__() because it is asked for in the instructions
+    #     """
+    #     Display the item's name, price, and quantity.
+    #
+    #     This method prints a user-friendly string representation of the
+    #     `Item` object's current state to standard output, including its
+    #     name, price, and quantity. It is intended for quick inspection
+    #     or simple display purposes rather than a formal string
+    #     representation (`__repr__` or `__str__`).
+    #
+    #     :return: None, as the method's primary effect is a side effect
+    #         (printing to console) and it does not explicitly return a value.
+    #     :rtype: None
+    #     """
+    #     promotion_info = f", Promotion: {self.promotion.name}" if self.promotion else ""
+    #     print(
+    #         f"{self.name}, Price: {self.price}, Quantity: {self.quantity}{promotion_info}"
+    #     )
 
     def buy(self, quantity: int) -> float:
         """
@@ -225,10 +229,14 @@ class NonStockedProduct(Product):
             return self.promotion.apply_promotion(self, quantity)
         return float(self.price * quantity)
 
-    def show(self) -> None:
-
+    def __str__(self) -> str:
         promotion_info = f", Promotion: {self.promotion.name}" if self.promotion else ""
-        print(f"{self.name}, Price: {self.price}{promotion_info}")
+        return f"{self.name}, Price: {self.price}{promotion_info}"
+
+    # def show(self) -> None:
+    #
+    #     promotion_info = f", Promotion: {self.promotion.name}" if self.promotion else ""
+    #     print(f"{self.name}, Price: {self.price}{promotion_info}")
 
 
 class LimitedProduct(Product):
@@ -245,12 +253,16 @@ class LimitedProduct(Product):
             )
         return super().buy(quantity)
 
-    def show(self) -> None:
-
+    def __str__(self) -> str:
         promotion_info = f", Promotion: {self.promotion.name}" if self.promotion else ""
-        print(
-            f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Max. amount/order: {self.maximum}{promotion_info}"
-        )
+        return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Max. amount/order: {self.maximum}{promotion_info}"
+
+    # def show(self) -> None:
+    #
+    #     promotion_info = f", Promotion: {self.promotion.name}" if self.promotion else ""
+    #     print(
+    #         f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Max. amount/order: {self.maximum}{promotion_info}"
+    #     )
 
 
 def main():
@@ -264,11 +276,14 @@ def main():
     print(macbook.buy(100))
     print(macbook.is_active())
 
-    headphones.show()
-    macbook.show()
+    # headphones.show()
+    # macbook.show()
+    print(headphones)
+    print(macbook)
 
     headphones.set_quantity(1000)
-    headphones.show()
+    # headphones.show()
+    print(headphones)
 
 
 if __name__ == "__main__":
