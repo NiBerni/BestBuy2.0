@@ -70,7 +70,14 @@ class Product:
         self.name = name
         self.price = price
         self.active = True
+        self.promotion = None
         self.set_quantity(quantity)
+
+    def get_promotion(self):
+        return self.promotion
+
+    def set_promotion(self, promotion) -> None:
+        self.promotion = promotion
 
     def __repr__(self) -> str:
 
@@ -165,7 +172,10 @@ class Product:
             (printing to console) and it does not explicitly return a value.
         :rtype: None
         """
-        print(f"{self.name}, Price: {self.price}, Quantity: {self.quantity}")
+        promotion_info = f", Promotion: {self.promotion.name}" if self.promotion else ""
+        print(
+            f"{self.name}, Price: {self.price}, Quantity: {self.quantity}{promotion_info}"
+        )
 
     def buy(self, quantity: int) -> float:
         """
@@ -190,6 +200,8 @@ class Product:
             raise ValueError(f"Not enough of {self.name} in stock")
 
         self.set_quantity(self.quantity - quantity)
+        if self.promotion:
+            return self.promotion.apply_promotion(self, quantity)
         return float(
             self.price * quantity,
         )
@@ -209,11 +221,14 @@ class NonStockedProduct(Product):
         if quantity <= 0:
             raise ValueError(f"Not enough of {self.name} in stock")
 
+        if self.promotion:
+            return self.promotion.apply_promotion(self, quantity)
         return float(self.price * quantity)
 
     def show(self) -> None:
 
-        print(f"{self.name}, Price: {self.price}")
+        promotion_info = f", Promotion: {self.promotion.name}" if self.promotion else ""
+        print(f"{self.name}, Price: {self.price}{promotion_info}")
 
 
 class LimitedProduct(Product):
@@ -222,7 +237,7 @@ class LimitedProduct(Product):
         super().__init__(name, price, quantity)
         self.maximum = maximum
 
-    def buy(self, quantity: int) -> None:
+    def buy(self, quantity: int) -> float:
 
         if quantity > self.maximum:
             raise ValueError(
@@ -232,8 +247,9 @@ class LimitedProduct(Product):
 
     def show(self) -> None:
 
+        promotion_info = f", Promotion: {self.promotion.name}" if self.promotion else ""
         print(
-            f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Max. amount/order: {self.maximum}"
+            f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Max. amount/order: {self.maximum}{promotion_info}"
         )
 
 
