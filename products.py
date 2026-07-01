@@ -218,29 +218,34 @@ class Product:
 
     def buy(self, quantity: int) -> float:
         """
-        Process a purchase request for a specified quantity of the products.
+        Processes a purchase for a specified quantity of the product, updating
+        the available stock and calculating the total cost. This method ensures
+        that the product is active, the quantity is valid, and sufficient stock
+        is available before proceeding with the transaction.
 
-        This method decrements the available stock quantity by the
-        `quantity` requested and calculates the total cost of the purchase.
-        It validates the input `quantity` to ensure it is positive and does
-        not exceed the currently available stock.
+        Args:
+            quantity: The number of items to purchase. This must be a positive
+                integer.
 
-        :param quantity: The number of units of the product to purchase.
-        :type quantity: int
-        :raises ValueError: If `quantity` is less than or equal to zero.
-        :raises ValueError: If the requested `quantity` exceeds the currently
-            available stock.
-        :return: The total monetary cost of the transaction.
-        :rtype: float
+        Returns:
+            The total monetary cost of the purchased quantity.
+
+        Raises:
+            ValueError: If the product is not currently marked as active,
+                preventing any purchases.
+            ValueError: If the requested quantity to buy is zero or a negative
+                number, which is an invalid amount.
+            ValueError: If the requested quantity exceeds the currently available
+                stock for this product.
         """
+        if not self.active:
+            raise ValueError(f"Product '{self.name}' is not active.")
         if quantity <= 0:
             raise ValueError("Can't buy a negative amount of products")
         if quantity > self.quantity:
             raise ValueError(f"Not enough of {self.name} in stock")
 
         self.set_quantity(self.quantity - quantity)
-        if self.promotion:
-            return self.promotion.apply_promotion(self, quantity)
         return float(
                 self.price * quantity,
         )
