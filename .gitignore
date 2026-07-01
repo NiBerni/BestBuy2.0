@@ -180,3 +180,4 @@ _static
 .guides/
 tests/
 
+!/tests/
