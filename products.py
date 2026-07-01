@@ -107,7 +107,7 @@ class Product:
     def __repr__(self) -> str:
 
         return (
-            f"Product(name={self.name}, price={self.price}, quantity={self.quantity})"
+                f"Product(name={self.name}, price={self.price}, quantity={self.quantity})"
         )
 
     def get_quantity(self) -> int:
@@ -242,7 +242,7 @@ class Product:
         if self.promotion:
             return self.promotion.apply_promotion(self, quantity)
         return float(
-            self.price * quantity,
+                self.price * quantity,
         )
 
 
@@ -369,7 +369,7 @@ class LimitedProduct(Product):
         """
         if quantity > self.maximum:
             raise ValueError(
-                f"Product {self.name} can only purchased up to {self.maximum} times per order"
+                    f"Product {self.name} can only purchased up to {self.maximum} times per order"
             )
         return super().buy(quantity)
 
@@ -388,8 +388,8 @@ class LimitedProduct(Product):
         """
         promotion_info = f", Promotion: {self.promotion.name}" if self.promotion else ""
         return (
-            f"{self.name}, Price: {self.price}, Quantity: {self.quantity},"
-            f" Max. amount/order: {self.maximum}{promotion_info}"
+                f"{self.name}, Price: {self.price}, Quantity: {self.quantity},"
+                f" Max. amount/order: {self.maximum}{promotion_info}"
         )
 
     # def show(self) -> None:
@@ -397,27 +397,6 @@ class LimitedProduct(Product):
     #     print(
     #         f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Max. amount/order: {self.maximum}{promotion_info}"
     #     )
-
-
-def main():
-    """
-    Demonstrate the functionality of the `Product` class.
-    """
-    headphones = Product("Bose QuietComfort Earbuds", price=250, quantity=500)
-    macbook = Product("MacBook Air M2", price=1450, quantity=100)
-
-    print(headphones.buy(50))
-    print(macbook.buy(100))
-    print(macbook.is_active())
-
-    # headphones.show()
-    # macbook.show()
-    print(headphones)
-    print(macbook)
-
-    headphones.set_quantity(1000)
-    # headphones.show()
-    print(headphones)
 
 
 if __name__ == "__main__":
