@@ -44,6 +44,8 @@ class Store:
             managed by this instance.
         :type product_list: list[products.Product]
         """
+        if not all(isinstance(p, products.Product) for p in product_list):
+            raise ValueError("All items in product_list must be Product instances.")
         self.products = product_list
 
     def add_product(self, product) -> None:
