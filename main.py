@@ -40,8 +40,7 @@ def list_products(store_obj: store.Store) -> None:
     print()
     all_products = store_obj.get_all_products()
     for i, product in enumerate(all_products, start=1):
-        print(f"{i}.", end="")
-        product.show()
+        print(f"{i}. {product}")
     print()
     print(80 * "_")
 
@@ -59,8 +58,7 @@ def place_order(store_obj: store.Store) -> None:
     print(80 * "_")
     all_products = store_obj.get_all_products()
     for i, product in enumerate(all_products, start=1):
-        print(f"{i}.", end="")
-        product.show()
+        print(f"{i}. {product}")
     print()
     print(80 * "_")
     print()

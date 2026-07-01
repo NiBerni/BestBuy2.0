@@ -129,7 +129,3 @@ class Store:
 
     def __repr__(self) -> str:
         return f"Store(products={self.products})"
-
-
-if __name__ == "__main__":
-    main()

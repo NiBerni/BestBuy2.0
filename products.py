@@ -402,7 +402,3 @@ class LimitedProduct(Product):
     #     print(
     #         f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Max. amount/order: {self.maximum}{promotion_info}"
     #     )
-
-
-if __name__ == "__main__":
-    main()
