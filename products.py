@@ -246,9 +246,11 @@ class Product:
             raise ValueError(f"Not enough of {self.name} in stock")
 
         self.set_quantity(self.quantity - quantity)
-        return float(
-                self.price * quantity,
-        )
+
+        if self.promotion:
+            return self.promotion.apply_promotion(self, quantity)
+
+        return float(self.price * quantity)
 
 
 class NonStockedProduct(Product):
